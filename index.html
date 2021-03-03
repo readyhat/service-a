@@ -42,9 +42,14 @@
 
 <script>
   $(document).ready(function () {
+    // Need to fetch current token
+    const data = {
+      access_token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IjlENDRDMjkxQTBGNUMyRjM0QUVBMDExMzhBOEU1Qjg5MkQ3Njg4NjQiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJwYXNzcG9ydFxcQzAxNjEzQUBjbGllbnQiLCJmc3ViIjoiZTU4NDIxN2MxNDg5ZTcxMTgwZTAwMDBlMWU4ZWY0ZDAiLCJmbmFtZSI6IkV4cGVyaWFuIEhlYWx0aCIsIkFsdGVybmF0ZUlkIjoiNTgwMjkiLCJuYmYiOjE2MTQ3MzIwMTEsImV4cCI6MTYxNDczMjkxMSwiaXNzIjoiQ2VudHJhbGl6ZWRIZWFsdGhjYXJlSWRlbnRpdHlQcm92aWRlciIsImF1ZCI6IkV4cGVyaWFuSGVhbHRoIn0.l-O8h8JoLHJLAGc8RifykTsihbO5t0EQ-IWeAcndDm2KZHxhrXqMAijboHKRqro0gJaHjpN3n4BRBup5qCPPziZjyq5yxlvq8wv6ECmaLRlT6SC33fRRT1mBruklz3aKmd7VtUPmFeWpaRQE06DhAEPeLUeWUukx7inpmqpWfDPI2_nW-55Cb1bpCmQVbX0E0mkxYXVuLJIjdOrwMYOlwlS8foQqq_Nb_OpdTN_p0mZXEPz1XbSOgOmNJ8793y5T8oLVzjqdB12eo-xYi_8u-IZ_xuw7K-vkg-yT3SWX7OH-uAF306e4s0FhHQoSlwRAW2cdyec9uXDfoa3KfmOiOA"
+    };
+
     $("#invoke").click(function (e) {
       var n = $("#name").val() || "World";
-      $.getJSON("http://http-3000-service-b-service-b.apps.experian.sandbox.readyhat.guru/api/ping", function (res) {
+      $.getJSON("https://api-3scale-apicast-staging.apps.experian.sandbox.readyhat.guru:443/api/ping", data, function (res) {
         $("#greeting-result").text(JSON.stringify(res));
       });
       e.preventDefault();
