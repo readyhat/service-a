@@ -22,10 +22,14 @@
 </div>
 </div>
 
-        <form class="form-inline">
-            <div class="form-group hide">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="World">
+        <form name="invoke-service-b">
+            <div class="form-group">
+                <label for="endpoint">Endpoint Host</label>
+                <input type="text" class="form-control" id="endpoint" required>
+            </div>
+            <div class="form-group">
+                <label for="token">Access Token</label>
+                <input type="text" class="form-control" id="token" required>
             </div>
             <button id="invoke" type="submit" class="btn btn-success">Invoke Service B</button>
         </form>
@@ -42,14 +46,9 @@
 
 <script>
   $(document).ready(function () {
-    // Need to fetch current token
-    const data = {
-      access_token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IjlENDRDMjkxQTBGNUMyRjM0QUVBMDExMzhBOEU1Qjg5MkQ3Njg4NjQiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJwYXNzcG9ydFxcQzAxNjEzQUBjbGllbnQiLCJmc3ViIjoiZTU4NDIxN2MxNDg5ZTcxMTgwZTAwMDBlMWU4ZWY0ZDAiLCJmbmFtZSI6IkV4cGVyaWFuIEhlYWx0aCIsIkFsdGVybmF0ZUlkIjoiNTgwMjkiLCJuYmYiOjE2MTQ3MzIwMTEsImV4cCI6MTYxNDczMjkxMSwiaXNzIjoiQ2VudHJhbGl6ZWRIZWFsdGhjYXJlSWRlbnRpdHlQcm92aWRlciIsImF1ZCI6IkV4cGVyaWFuSGVhbHRoIn0.l-O8h8JoLHJLAGc8RifykTsihbO5t0EQ-IWeAcndDm2KZHxhrXqMAijboHKRqro0gJaHjpN3n4BRBup5qCPPziZjyq5yxlvq8wv6ECmaLRlT6SC33fRRT1mBruklz3aKmd7VtUPmFeWpaRQE06DhAEPeLUeWUukx7inpmqpWfDPI2_nW-55Cb1bpCmQVbX0E0mkxYXVuLJIjdOrwMYOlwlS8foQqq_Nb_OpdTN_p0mZXEPz1XbSOgOmNJ8793y5T8oLVzjqdB12eo-xYi_8u-IZ_xuw7K-vkg-yT3SWX7OH-uAF306e4s0FhHQoSlwRAW2cdyec9uXDfoa3KfmOiOA"
-    };
-
-    $("#invoke").click(function (e) {
-      var n = $("#name").val() || "World";
-      $.getJSON("https://api-3scale-apicast-staging.apps.experian.sandbox.readyhat.guru:443/api/ping", data, function (res) {
+    $('form[name="invoke-service-b"]').submit(function (e) {
+      const access_token = $("#token").val();
+      $.getJSON($("#endpoint").val(), { access_token }, function (res) {
         $("#greeting-result").text(JSON.stringify(res));
       });
       e.preventDefault();
